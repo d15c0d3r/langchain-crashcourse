@@ -22,11 +22,15 @@ prompt = prompt_template.invoke({"topic": "elephants", "num_jokes": 3})
 print("Type 2: ", prompt)
 
 # Doesn't work
-messages = [("system", "You are a comedian who tells jokes about {topic}"),
- HumanMessage(content="Tell me {num_jokes} jokes")]
+# messages = [("system", "You are a comedian who tells jokes about {topic}"),
+#  HumanMessage(content="Tell me {num_jokes} jokes")]
 
-prompt_template = ChatPromptTemplate.from_messages(messages)
-prompt = prompt_template.invoke({"topic": "elephants", "num_jokes": 3})
-print("Type 3: ", prompt)
+#prompt_template = ChatPromptTemplate.from_messages(messages)
+#prompt = prompt_template.invoke({"topic": "elephants", "num_jokes": 3})
+#print("Type 3: ", prompt)
 # Output:
 # messages=[SystemMessage(content='You are a comedian who tells jokes about elephants', additional_kwargs={}, response_metadata={}), HumanMessage(content='Tell me {num_jokes} jokes', additional_kwargs={}, response_metadata={})]
+
+## invoke model with the prompt
+result = model.invoke(prompt)
+print(result.content)
