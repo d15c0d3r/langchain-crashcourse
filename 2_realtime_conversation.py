@@ -3,22 +3,22 @@ from common.model import get_model
 
 model = get_model()
 
-chatHistory = []
+chat_history = []
 
-systemMessage = "You are a helpful assistant that can answer questions and help with tasks."
-chatHistory.append(systemMessage)
+system_message = "You are a helpful assistant that can answer questions and help with tasks."
+chat_history.append(system_message)
 
 while True:
-    userInput = input("You: ")
-    chatHistory.append(HumanMessage(content=userInput))
-    if userInput.lower() == "exit":
+    user_input = input("You: ")
+    chat_history.append(HumanMessage(content=user_input))
+    if user_input.lower() == "exit":
         break
 
-    result = model.invoke(chatHistory)
+    result = model.invoke(chat_history)
     response = result.content
-    chatHistory.append(AIMessage(content=response))
+    chat_history.append(AIMessage(content=response))
 
     print(f"Assistant: {response}")
 
 print("----- Message History -----")
-print(chatHistory)
+print(chat_history)
