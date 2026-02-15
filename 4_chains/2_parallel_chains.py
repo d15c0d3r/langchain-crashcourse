@@ -36,8 +36,8 @@ def analyze_cons(features):
     return prompt_template.format_prompt(features=features)
 
 
-pros_branch = RunnableLambda(analyze_pros) | model | StrOutputParser()
-cons_branch = RunnableLambda(analyze_cons) | model | StrOutputParser()
+pros_chain = RunnableLambda(analyze_pros) | model | StrOutputParser()
+cons_chain = RunnableLambda(analyze_cons) | model | StrOutputParser()
 
 
 def combine_pros_and_cons(pros, cons):
@@ -48,7 +48,7 @@ chain = (
     prompt_template
     | model
     | StrOutputParser()
-    | RunnableParallel(pros=pros_branch, cons=cons_branch)
+    | RunnableParallel(pros=pros_chain, cons=cons_chain)
     | RunnableLambda(lambda x: combine_pros_and_cons(x["pros"], x["cons"]))
 )
 
