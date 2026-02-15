@@ -1,3 +1,5 @@
 .env
 
 langchain-crashcourse/
+__pycache__/
+.DS_Store
