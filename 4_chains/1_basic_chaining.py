@@ -17,6 +17,7 @@ prompt_template = ChatPromptTemplate.from_messages(messages)
 uppercase_output = RunnableLambda(lambda x: x.upper())
 count_words = RunnableLambda(lambda x: f"Word Count: {len(x.split())}\n{x}")
 
+# Think of RunnableLambda as "turn any Python function into a Runnable so it can participate in a chain with |." What happens inside that function is entirely up to you.
 chain = prompt_template | model | StrOutputParser() | uppercase_output | count_words
 
 result = chain.invoke({"topic": "doctors", "num_jokes": 3})

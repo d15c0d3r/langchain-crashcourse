@@ -4,7 +4,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 model = get_model()
-
+# As the name suggests, The input of the previous chain is going to the output of all the parallel
+# chains.
 # create prompt template to review a product
 # -> system: You are an expert product reviewer
 # -> human: Review the product {product}
@@ -49,6 +50,7 @@ chain = (
     | model
     | StrOutputParser()
     | RunnableParallel(pros=pros_chain, cons=cons_chain)
+    # RunnableParallel outputs a dictionary where the keys match the keyword argument names you passed when constructing it.
     | RunnableLambda(lambda x: combine_pros_and_cons(x["pros"], x["cons"]))
 )
 
