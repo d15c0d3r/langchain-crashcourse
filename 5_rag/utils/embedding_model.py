@@ -1,6 +1,6 @@
 from langchain_ollama import OllamaEmbeddings
 
-embedding_model = OllamaEmbeddings(model="bge-m3")
 
 def get_embedding_model():
+    embedding_model = OllamaEmbeddings(model="qwen3-embedding")
     return embedding_model
