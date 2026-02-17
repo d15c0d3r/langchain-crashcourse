@@ -1,4 +1,4 @@
-from utils.vector_db import get_vector_db
+from utils.vector_db import get_chroma_db
 
 # For RAG - Retrieval-Augmented Generation
 # 1. Create embeddings
@@ -7,7 +7,8 @@ from utils.vector_db import get_vector_db
 # 4. Use the retrieved embeddings to generate a response
 
 # 3, 4 are covered in this file
-db = get_vector_db()
+db_dir = "chroma_db"
+db = get_chroma_db(db_dir)
 
 query = "Who is Odysseus' wife?"
 

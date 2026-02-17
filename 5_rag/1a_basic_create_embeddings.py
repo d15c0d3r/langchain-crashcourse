@@ -3,7 +3,7 @@ import os
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from utils.vector_db import chroma_db_directory, get_chroma_db
+from utils.vector_db import get_chroma_db
 
 # For RAG - Retrieval-Augmented Generation
 # 1. Create embeddings
@@ -15,12 +15,13 @@ from utils.vector_db import chroma_db_directory, get_chroma_db
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
 file_directory = os.path.join(current_directory, "books", "odyssey.txt")
+db_dir = "chroma_db"
 
 if not os.path.exists(file_directory):
-    print("\nFile does not exist")
+    print("\nFile odyssey.txt does not exist")
     exit(1)
 
-if os.path.exists(chroma_db_directory):
+if os.path.exists(db_dir):
     print("\nChroma database already exists")
     exit()
 
@@ -35,9 +36,9 @@ chunks = text_splitter.split_documents(documents)
 print(f"\nNumber of chunks: {len(chunks)}")
 
 # create embeddings using vector_db (Chroma)
-vector_db = get_chroma_db()
+vector_db = get_chroma_db(db_dir)
 vector_db.add_documents(
     chunks
 )
 
-print(f"Vector database: {vector_db}")
+print("Created embeddings for odyssey.txt")
